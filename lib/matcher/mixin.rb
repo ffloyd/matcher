@@ -11,5 +11,25 @@ module Matcher
       else result
       end
     end
+
+    def case_match(values, pattern_map = {})
+      values     = Array(values)
+      else_proc  = pattern_map.delete(:else)
+      mismatches = []
+
+      pattern_map.each do |pattern, proc|
+        result = Matcher::Match.call(pattern, values)
+
+        if result.is_a? Matcher::Error
+          mismatches << result
+        else
+          return proc.call(result)
+        end
+      end
+
+      return else_proc.call(values) if else_proc
+
+      raise Matcher::CaseError.new(mismatches)
+    end
   end
 end
