@@ -3,6 +3,14 @@ module Matcher
   module Mixin
     private
 
+    def ok(*args)
+      [:ok, *args]
+    end
+
+    def err(*args)
+      [:err, *args]
+    end
+
     def match(*pattern, &values_proc)
       result = Matcher::Match.call(pattern, Array(values_proc.call))
 

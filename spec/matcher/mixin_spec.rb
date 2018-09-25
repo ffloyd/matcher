@@ -26,7 +26,7 @@ RSpec.describe Matcher::Mixin do
 
     context 'when values mismatch pattern' do
       subject(:match) do
-        ctx.match(:ok, String, Integer) { [:fail, 'aaa', 22] }
+        ctx.match(:ok, String, Integer) { [:err, 'aaa', 22] }
       end
 
       it do
@@ -79,6 +79,18 @@ RSpec.describe Matcher::Mixin do
       it 'returns result from callback' do
         is_expected.to eq callback_result
       end
+    end
+  end
+
+  describe '#ok' do
+    it 'prepends arguments with :ok and returns array' do
+      expect(ctx.ok(1, 2, 3)).to eq [:ok, 1, 2, 3]
+    end
+  end
+
+  describe '#err' do
+    it 'prepends arguments with :err and returns array' do
+      expect(ctx.err(1, 2, 3)).to eq [:err, 1, 2, 3]
     end
   end
 end
