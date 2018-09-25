@@ -3,6 +3,7 @@ module Matcher
   module Match
     def self.call(pattern, values)
       pattern.each_with_index do |clause, index|
+        next if clause == :_
         return ::Matcher::Error.new unless clause === values[index] # rubocop:disable Style/CaseEquality
       end
 

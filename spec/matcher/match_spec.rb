@@ -26,4 +26,10 @@ RSpec.describe Matcher::Match do
 
   include_examples 'failure match', [String, Integer], [:aaa, 22]
   include_examples 'failure match', [1...3, 1..3],     [3, 3]
+
+  include_examples 'success match', [:_], [1]
+  include_examples 'success match', [:_], [nil]
+  include_examples 'success match', [:_], [:_]
+
+  include_examples 'success match', [:_, 10], [:_, 10]
 end
