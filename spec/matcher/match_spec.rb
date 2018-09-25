@@ -32,4 +32,14 @@ RSpec.describe Matcher::Match do
   include_examples 'success match', [:_], [:_]
 
   include_examples 'success match', [:_, 10], [:_, 10]
+
+  include_examples 'success match', [:*], [1, 10]
+  include_examples 'success match', [:*], [1, 10, '100']
+  include_examples 'success match', [:*], []
+
+  include_examples 'success match', [:ok, :*], [:ok]
+  include_examples 'success match', [:ok, :*], [:ok, 1]
+
+  include_examples 'failure match', [:ok, :*], [:err, 22]
+  include_examples 'failure match', [:ok, :*], [:err, :ok]
 end
