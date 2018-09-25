@@ -42,4 +42,11 @@ RSpec.describe Matcher::Match do
 
   include_examples 'failure match', [:ok, :*], [:err, 22]
   include_examples 'failure match', [:ok, :*], [:err, :ok]
+
+  include_examples 'success match', [:ok, [:ok]], [:ok, [:ok]]
+  include_examples 'success match', [:ok, [:err, [:ok, [:err], [:ok]]]], [:ok, [:err, [:ok, [:err], [:ok]]]]
+  include_examples 'success match', [:ok, [String, String, :*]], [:ok, ['a', 'b']]
+
+  include_examples 'failure match', [:ok, [:ok, 'aaa']],  [:ok, [:err, 'bbb']]
+  include_examples 'failure match', [:ok, [:ok, String]], [:ok, [:ok, :symbol]]
 end
