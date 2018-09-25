@@ -12,12 +12,12 @@ end
 
 RSpec.describe Matcher::Match do
   include_examples 'success match', [String], ['aaa']
-  include_examples 'success match', [Fixnum], [22]
+  include_examples 'success match', [Integer], [22]
   include_examples 'success match', [1..3],   [3]
   include_examples 'success match', [:ok],    [:ok]
 
   include_examples 'failure match', [String], [1]
-  include_examples 'failure match', [Fixnum], [22.22]
+  include_examples 'failure match', [Integer], [22.22]
   include_examples 'failure match', [1..3],   [4]
   include_examples 'failure match', [:ok],    [:error]
 
